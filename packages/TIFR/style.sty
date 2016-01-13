@@ -1,0 +1,135 @@
+\ProvidesPackage{packages/TIFR/style}
+
+
+
+% School color found from university's graphic identity site:
+% http://isites.harvard.edu/icb/icb.do?keyword=k75408&pageid=icb.page392732
+%\definecolor{SchoolColor}{rgb}{0, 0, 1} % Crimson
+
+\definecolor{SchoolColor}{rgb}{0,0,1}
+
+\definecolor{chaptergrey}{rgb}{0, 0, 1} % for chapter numbers
+
+\hypersetup{
+    colorlinks,
+    citecolor=SchoolColor,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=SchoolColor,
+}
+
+% Formatting guidelines found in:
+% http://www.gsas.harvard.edu/publications/form_of_the_phd_dissertation.php
+\renewcommand{\frontmatter}{
+	\input{frontmatter/personalize}
+	\maketitle
+	\copyrightpage
+	\abstractpage
+	\tableofcontents
+	% \listoffigures % optional
+	\dedicationpage
+	\acknowledgments
+}
+
+\renewcommand{\maketitle}{
+	\thispagestyle{empty}
+	\begin{center}\
+	\Huge \textcolor{SchoolColor}{\thetitle} \normalsize \\[100pt]
+	\textit{A Thesis}\\[90pt]
+	\textit{Submitted to the}\\
+	\textsc{\@university, \@universitycity }\\
+	\textit{for the degree of}\\
+	\textsc{\@degree}\\
+	\textit{in}\\
+	\textsc{\@field}	\\[90pt]
+	\textit{by}\\
+\ifpublic
+	\textsc{\theauthor}\\[130pt]
+\else
+	\textsc{\theauthor}\\[90pt]
+	\begin{center}
+	\includegraphics[width=2.5cm]{tifr-logo}
+	\end{center}
+\fi
+	\textsc{\@department}\\
+	\textsc{\@university}\\
+	\textsc{\@universitycity}\\
+	\textit{\@degreemonth~ \@degreeyear}\\
+\iffinal
+	\textit{Final Version Submitted in \@degreefinalmonth\ \@degreefinalyear}
+\fi
+	\end{center} \vspace*{\fill}
+\setcounter{page}{0}
+
+}
+
+\newcommand{\copyrightpage}{
+	\newpage
+	\thispagestyle{empty}
+	\vspace*{\fill}
+	\scshape \noindent \small \copyright \small 2014\hspace{3pt}-- \theauthor \\
+	\noindent all rights reserved.
+	\vspace*{\fill}
+	\newpage
+	\rm
+}
+
+\newcommand{\abstractpage}{
+	\newpage
+	\pagenumbering{roman}
+	\setcounter{page}{1}
+	\pagestyle{fancy}
+	\lhead{Thesis Advisor: Prof. \@advisor} \rhead{\@author}
+	\renewcommand{\headrulewidth}{0.0pt}
+	\vspace*{35pt}
+	\begin{center}
+	\Large \textcolor{SchoolColor}{\@title} \normalsize \\
+	\vspace*{20pt}
+	\scshape Abstract \\ \rm
+	\end{center}
+	\input{frontmatter/abstract}
+	\vspace*{\fill}
+	\newpage \lhead{} \rhead{}
+	\cfoot{\thepage}
+}
+
+\newcommand{\dedicationpage}{
+	\newpage \thispagestyle{fancy} \vspace*{\fill}
+	\scshape \noindent \input{frontmatter/dedication}
+	\vspace*{\fill} \newpage \rm
+}
+
+\newcommand{\acknowledgments}{
+	\chapter*{Acknowledgments}
+	\noindent
+	\input{frontmatter/thanks}
+	\vspace*{\fill} \newpage
+	\setcounter{page}{1}
+	\pagenumbering{arabic}
+}
+
+
+\newcommand{\declarationpage}{
+	\chapter*{Declaration}
+
+This thesis is a presentation of my original research work.
+Wherever contributions of others are involved, every effort is
+made to indicate this clearly, with due reference to the literature,
+and acknowledgement of collaborative research and discussions.
+\paragraph{}
+The work was done under the guidance of Prof. \@advisor, 
+at the \@university, \@universitycity.\\[70pt]
+
+\hfill \@author\\[30pt]
+\begin{center}
+\line(1,0){400}\\[40pt]
+\end{center}
+
+In my capacity as supervisor of the candidate’s thesis, I certify
+that the above statements are true to the best of my knowledge.\\[70pt]
+\noindent
+Prof. \@advisor\\
+\noindent
+Date:
+}
+

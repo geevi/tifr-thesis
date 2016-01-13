@@ -1,0 +1,18 @@
+
+
+\newif\ifpublic % removes declaration and synposis
+\newif\ifscanneddeclaration % you might want to have a scanned copy of the signed declaration page. Then keep that file as declaration.pdf and set this to true
+\newif\ifnosynopsis
+\newif\ifnodeclaration
+\newif\iffinal  % adds a line "Final Version Submitted .." in the cover page. The month and year are specified  in frontmatter/personalize.tex 
+
+\publicfalse
+\scanneddeclarationfalse
+\nosynopsistrue
+\finaltrue
+
+
+\ifpublic
+\nosynopsistrue
+\nodeclarationtrue
+\fi

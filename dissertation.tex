@@ -1,43 +1,104 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
 
-% Modify the following line to match your school
 % Available options include `Harvard`, `Princeton`, and `NYU`.
-\documentclass[School=Harvard]{Dissertate}
+\documentclass[School=TIFR,twoside]{Dissertate}
 
+
+
+\input{ifs}
+
+\usepackage{tikz}
+\usepackage{bbm}
+\usepackage[]{algorithm2e}
+\usepackage{pdfpages}
+
+
+\input{macros}
 \begin{document}
 
-% the front matter
 \input{frontmatter/personalize}
+
+
 \maketitle
-\copyrightpage
+
+\pagenumbering{gobble}
+\onehalfspacing
+\ifnodeclaration
+\else
+\ifscanneddeclaration
+\includepdf[pages=-]{declaration.pdf}
+\else
+\declarationpage
+\fi
+\fi
+
+\cleardoublepage
+
+%\copyrightpage
 \abstractpage
+
+\cleardoublepage
+\singlespacing
 \tableofcontents
 %\authorlist
-\listoffigures
+%\listoffigures
 \dedicationpage
-\acknowledgments
-
 \doublespacing
 
-% include each chapter...
-\setcounter{chapter}{-1}  % start chapter numbering at 0
-\include{chapters/introduction}
+\acknowledgments
+\ifnosynopsis
+\else
+\pagenumbering{arabic}
+\part*{\sc Synopsis}
+\addcontentsline{toc}{part}{\sc A\quad Synopsis}
+
+\includepdf[pages=-]{synopsis.pdf}
+
+\part*{\sc Thesis}
+\cleardoublepage
+\addcontentsline{toc}{part}{\sc B\quad Thesis}
+\fi
+\begin{savequote}[75mm] 
+Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple. But it’s worth it in the end because once you get there, you can move mountains. 
+\qauthor{Steve Jobs} 
+\end{savequote}
+\chapter*{}
+
+\part{Introduction}\label{part:one}
+
+\setcounter{chapter}{0}  
 \include{chapters/chapter1}
+
+\part{Mathematical Techniques}\label{part:two}
+
 \include{chapters/chapter2}
 \include{chapters/chapter3}
-\include{chapters/conclusion}
-\begin{appendices}
-    \include{chapters/appendixA}
-\end{appendices}
+\include{chapters/chapter4}
+\include{chapters/chapter5}
+
+\part{Hardness of Approximate Coloring}\label{part:three}
+
+\include{chapters/chapter6}
+\include{chapters/chapter7}
+\include{chapters/chapter8}
+\include{chapters/chapter9}
+\include{chapters/chapter10}
+
+%\part{Conclusions}
+
+%\include{chapters/chapter11}
+
+%\begin{appendices}
+%    \include{chapters/appendixA}
+%\end{appendices}
 
 \singlespacing
 
-% the back matter
 \clearpage
-\bibliography{references}
+\bibliography{}
 \addcontentsline{toc}{chapter}{References}
-\bibliographystyle{apalike2}
+\bibliographystyle{}
 
 \include{endmatter/colophon}
 

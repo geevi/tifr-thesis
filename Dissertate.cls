@@ -8,12 +8,45 @@
 %     supported       = "send email to suchow@post.harvard.edu",
 %     docstring       = "Class for a dissertation."
 % --------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{Dissertate}[2014/01/24 v1.0 Dissertate Class]
-\LoadClass[12pt, oneside, letterpaper]{book}
+\LoadClass[12pt, oneside, a4paper]{book}
+
+
+%% Theorems and related environments. 
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{theorem*}{Theorem}
+\newtheorem{axiom}{Axiom}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\def\lemmaautorefname{Lemma}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{informal-definition}[theorem]{Informal Definition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{nclaim}{Claim}
+\newtheorem{fact}[]{Fact}
+\newtheorem{subclaim}[theorem]{Subclaim}
+\newtheorem{problem}[]{Problem}
+\newtheorem{openproblem}[]{Open Problem}
+\newtheorem{exercise}{Exercise}
+
 
 % some definitions
+
+\def\degreefinalyear#1{\gdef\@degreefinalyear{#1}}
+\def\degreefinalmonth#1{\gdef\@degreefinalmonth{#1}}
 \def\degreeyear#1{\gdef\@degreeyear{#1}}
 \def\degreemonth#1{\gdef\@degreemonth{#1}}
 \def\degree#1{\gdef\@degree{#1}}
@@ -39,6 +72,7 @@
 \RequirePackage{titling}
 \RequirePackage[palatino]{quotchap}
 
+
 \RequirePackage{kvoptions}
 \DeclareStringOption{School}[]
 \ProcessKeyvalOptions*
@@ -47,9 +81,9 @@
 \RequirePackage{graphicx}
 \RequirePackage{amssymb}
 \RequirePackage{lettrine}
-\RequirePackage[super,comma,numbers]{natbib}
+\RequirePackage[comma,numbers]{natbib}
 \renewcommand{\bibnumfmt}[1]{[#1]}
-\RequirePackage[width=5.75in, letterpaper]{geometry}
+\RequirePackage[a4paper, margin=3.5cm]{geometry}
 \RequirePackage{fancyhdr}
 
 \usepackage[titletoc]{appendix}
@@ -68,14 +102,15 @@
 \usepackage{fixltx2e}
 \usepackage{ragged2e}
 
+
 \renewcommand\bibname{References}
 \renewcommand\listfigurename{Listing of figures}
 \RaggedRight
 
 \parindent 12pt
 \RequirePackage{mathspec}
-\setmathsfont(Digits,Latin,Greek)[Numbers={Proportional}]{EB Garamond}
-\setmathrm{EB Garamond}
+%\setmathsfont(Digits,Latin,Greek)[Numbers={Proportional}]{EB Garamond}
+%\setmathrm{EB Garamond}
 
 \widowpenalty=300
 \clubpenalty=300
@@ -129,3 +164,15 @@
       {\@latex@warning{Empty `thebibliography' environment}}
      \endlist}
 \makeatother
+
+\renewcommand{\chapterheadstartvskip}{\vspace{4cm}}
+\renewcommand{\chapterheadendvskip}{\vspace{2cm}}
+
+
+\titleformat*{\section}{\Large\bf}
+\titleformat*{\subsection}{\centering \large \sc }
+%\titleformat*{\chapter}{ \sc }
+
+
+
+

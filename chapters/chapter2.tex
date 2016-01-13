@@ -1,26 +1,198 @@
-\begin{savequote}[75mm]
-This is some random quote to start off the chapter.
-\qauthor{Firstname lastname}
-\end{savequote}
 
-\chapter{The title of chapter two}
 
-\newthought{Lorem ipsum dolor sit amet}, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
+\chapter{Analysis of Functions on Product Spaces}
 
-Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.
+In this chapter, we will describe some results concerning functions
+on product probability spaces.
 
-Proin at eros non eros adipiscing mollis. Donec semper turpis sed diam. Sed consequat ligula nec tortor. Integer eget sem. Ut vitae enim eu est vehicula gravida. Morbi ipsum ipsum, porta nec, tempor id, auctor vitae, purus. Pellentesque neque. Nulla luctus erat vitae libero. Integer nec enim. Phasellus aliquam enim et tortor. Quisque aliquet, quam elementum condimentum feugiat, tellus odio consectetuer wisi, vel nonummy sem neque in elit. Curabitur eleifend wisi iaculis ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non velit non ligula laoreet ultrices. Praesent ultricies facilisis nisl. Vivamus luctus elit sit amet mi. Phasellus pellentesque, erat eget elementum volutpat, dolor nisl porta neque, vitae sodales ipsum nibh in ligula. Maecenas mattis pulvinar diam. Curabitur sed leo.
+\section{Preliminaries}
 
-Nulla facilisi. In vel sem. Morbi id urna in diam dignissim feugiat. Proin molestie tortor eu velit. Aliquam erat volutpat. Nullam ultrices, diam tempus vulputate egestas, eros pede varius leo, sed imperdiet lectus est ornare odio. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin consectetuer velit in dui. Phasellus wisi purus, interdum vitae, rutrum accumsan, viverra in, velit. Sed enim risus, congue non, tristique in, commodo eu, metus. Aenean tortor mi, imperdiet id, gravida eu, posuere eu, felis. Mauris sollicitudin, turpis in hendrerit sodales, lectus ipsum pellentesque ligula, sit amet scelerisque urna nibh ut arcu. Aliquam in lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla placerat aliquam wisi. Mauris viverra odio. Quisque fermentum pulvinar odio. Proin posuere est vitae ligula. Etiam euismod. Cras a eros.
+Let $(\Omega, \mu)$ be a discrete probability space and
+$(\Omega^L,\mu^{\otimes L})$ be the corresponding product space. For a function
+$f:\Omega^L \rightarrow \R$, the \emph{Efron-Stein decomposition} of $f$ with
+respect to the product space is given by
+$$ f(x_1,\cdots, x_L) = \sum_{\beta \subseteq [L]} f_\beta(x),$$
+where $f_\beta$ depends only on $x_i$ for $i\in \beta$ and 
+$$ \forall \beta' \not\supseteq \beta , a \in \Omega^{\beta'}, \E_{x \in
+\mu^{\otimes L}} \left[ f_\beta(x) \mid x_{\beta'} = a \right]=0.$$
+The $\ell_p$ and $\ell_\infty$ norms of $f$ with respect to the probability space
+are defined as
+$$\|f\|_p := \E_{x\in \mu^{\otimes L}}\left[f(x)^p\right]^{1/p},
+~~~~~~~~~~~~\|f\|_\infty :=\max_{x\in \Omega^{\otimes L}}\left|f(x)\right|.$$ 
+For $i \in [L]$, the \emph{influence} of the $i$th
+coordinate on $f$ is defined as follows.
+$$\Inf_i[f] := \E_{x_1,\cdots, x_{i-1},x_{i+1},\cdots , x_L}\Var_{x_i}[f
+(x_1,\cdots, x_L)]  = \sum_{\beta: i\in \beta} \|f_\beta\|^2_2.$$
+For an integer $d$, the \emph{degree $d$ influence} is defined as
+$$\Inf_i^{\leq d}[f] := \sum_{\beta: i\in \beta, |\beta| \leq d} \|f_\beta\|^2_2.$$
 
-Nunc auctor bibendum eros. Maecenas porta accumsan mauris. Etiam enim enim, elementum sed, bibendum quis, rhoncus non, metus. Fusce neque dolor, adipiscing sed, consectetuer et, lacinia sit amet, quam. Suspendisse wisi quam, consectetuer in, blandit sed, suscipit eu, eros. Etiam ligula enim, tempor ut, blandit nec, mollis eu, lectus. Nam cursus. Vivamus iaculis. Aenean risus purus, pharetra in, blandit quis, gravida a, turpis. Donec nisl. Aenean eget mi. Fusce mattis est id diam. Phasellus faucibus interdum sapien. Duis quis nunc. Sed enim.
+\section{Invariance Principle}
+%TODO: Motivate Invariance Principle More
 
-Pellentesque vel dui sed orci faucibus iaculis. Suspendisse dictum magna id purus tincidunt rutrum. Nulla congue. Vivamus sit amet lorem posuere dui vulputate ornare. Phasellus mattis sollicitudin ligula. Duis dignissim felis et urna. Integer adipiscing congue metus. Nam pede. Etiam non wisi. Sed accumsan dolor ac augue. Pellentesque eget lectus. Aliquam nec dolor nec tellus ornare venenatis. Nullam blandit placerat sem. Curabitur quis ipsum. Mauris nisl tellus, aliquet eu, suscipit eu, ullamcorper quis, magna. Mauris elementum, pede at sodales vestibulum, nulla tortor congue massa, quis pellentesque odio dui id est. Cras faucibus augue.
+Let $(\Omega^k, \mu)$ be a probability space. Let $\supp(\mu) := \{ x\in \Omega^k 
+\mid \mu(x) > 0\}$. 
 
-Suspendisse vestibulum dignissim quam. Integer vel augue. Phasellus nulla purus, interdum ac, venenatis non, varius rutrum, leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis a eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce magna mi, porttitor quis, convallis eget, sodales ac, urna. Phasellus luctus venenatis magna. Vivamus eget lacus. Nunc tincidunt convallis tortor. Duis eros mi, dictum vel, fringilla sit amet, fermentum id, sem. Phasellus nunc enim, faucibus ut, laoreet in, consequat id, metus. Vivamus dignissim. Cras lobortis tempor velit. Phasellus nec diam ac nisl lacinia tristique. Nullam nec metus id mi dictum dignissim. Nullam quis wisi non sem lobortis condimentum. Phasellus pulvinar, nulla non aliquam eleifend, tortor wisi scelerisque felis, in sollicitudin arcu ante lacinia leo.
+\begin{definition}[Connected Sets and Distributions] \label{def:connected}
+We say that  $S \subseteq \Omega^k$ is 
+\emph{connected} if for every $x, y\in S$, there is a sequence of strings 
+starting with $x$ and ending with $y$ such that every element in the sequence is
+in $S$ and every two adjacent elements differ in exactly one coordinate. 
+The probability space is connected if $\supp(\mu)$ is connected.
+\end{definition}
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis.
 
-Cras sed ante. Phasellus in massa. Curabitur dolor eros, gravida et, hendrerit ac, cursus non, massa. Aliquam lorem. In hac habitasse platea dictumst. Cras eu mauris. Quisque lacus. Donec ipsum. Nullam vitae sem at nunc pharetra ultricies. Vivamus elit eros, ullamcorper a, adipiscing sit amet, porttitor ut, nibh. Maecenas adipiscing mollis massa. Nunc ut dui eget nulla venenatis aliquet. Sed luctus posuere justo. Cras vehicula varius turpis. Vivamus eros metus, tristique sit amet, molestie dignissim, malesuada et, urna.
+\begin{theorem}[{Mossel~\cite[Proposition 6.4]{Mossel2008}}]
 
-Cras dictum. Maecenas ut turpis. In vitae erat ac orci dignissim eleifend. Nunc quis justo. Sed vel ipsum in purus tincidunt pharetra. Sed pulvinar, felis id consectetuer malesuada, enim nisl mattis elit, a facilisis tortor nibh quis leo. Sed augue lacus, pretium vitae, molestie eget, rhoncus quis, elit. Donec in augue. Fusce orci wisi, ornare id, mollis vel, lacinia vel, massa.
+	\label{thm:invariance}
+	Let $(\Omega^k, \mu)$ be a connected probability space such the minimum probability of
+	every atom in $\supp(\mu)$ is at least $\alpha \in \left(0, \frac{1}{2}\right]$.
+	 Then there exists 
+	continuous functions $\overline{\Gamma} : (0,1)\rightarrow (0,1)$ and 
+	$\underline{\Gamma} : (0,1)\rightarrow (0,1)$ such that the following holds: 
+	For every $\epsilon>0$, there exists $\tau > 0$ and an integer $d$ such that 
+	if a function $f : \Omega^L \rightarrow [0,1]$ satisfies
+	%
+	$$\forall i\in [n],  \Inf_i^{\leq d} (f) \leq \tau $$
+	%
+	then 
+	%
+	$$\underline{\Gamma}\left(\E_\mu[f]\right) -\epsilon \leq \E_{(x_1,\ldots, x_k) \sim \mu}\left[
+	\prod_{j=1}^k f(x_j)\right] \leq \overline{\Gamma}\left(\E_\mu[f]\right) + \epsilon.$$
+	%
+	There exists an absolute constant $C$ such that one can take $\tau = \epsilon^
+	{C\frac{\log(\nicefrac{1}{\alpha})\log(\nicefrac{1}{\epsilon})}{\epsilon
+	\alpha^2}}$ and $d = \log(\nicefrac{1}{\tau})\log(\nicefrac{1}{\alpha})$.
+\end{theorem}
+
+Correlation is a measure of dependence in probability spaces where the sample space
+is a product set.
+
+\begin{definition}[Correlated Spaces]
+\label{def:correlation}
+Let $(\Omega_1 \times \Omega_2, \mu)$ be a finite probability space, the correlation between $\Omega_1$ and $\Omega_2$ with respect to $\mu$ us defined as 
+$$\rho(\Omega_1, \Omega_2; \mu) := \mathop{\max}_{\substack{f : \Omega_1 \rightarrow \R, \E[f]  = 0 , \E[f^2]\leq 1 \\ g: \Omega_2 \rightarrow \R, \E[g] = 0 , \E[g^2]\leq 1} }  \E_{(x,y) \sim \mu }[ |f(x)g(y)|] .$$
+For a probability space $\left(\prod_{i=1}^k\Omega_i, \mu\right)$, the correlation is given by
+$$\rho\left(\prod_{i=1}^k\Omega; \mu\right) := \max_{i \in [k]} \rho\left( \Omega_i, \prod_{ j \in [k], j \neq i} \Omega_i; \mu\right).$$ 
+\end{definition}
+
+The following result about correlated spaces is an
+adaptation of similar results (see Wenner
+\cite[Theorem~3.12]{Wenner2013} and Guruswami \& 
+Lee~\cite[Lemma~A.1]{GuruswamiL2015})   to proving
+our hardness results.
+ 
+\begin{theorem}
+
+  \label{thm:inv-prin} Let $(\Omega_1^k \times \Omega_2^k, \mu)$ be a
+  correlated probability space with correlation $\rho < 1$
+   such that the marginal of $\mu$ on any
+  pair of coordinates one each from $\Omega_1$ and $\Omega_2$ is a
+  product distribution. Let $\mu_1 ,\mu_2$ be the marginals of $\mu$
+  on $\Omega_1^k$ and $\Omega_2^k$ respectively. Let $X, Y$ be two
+  random $k\times L$ dimensional matrices chosen as follows:
+  independently for every $i \in [L]$, the pair of columns $(x^i,y^i)
+  \in \Omega_1^k \times \Omega_2^k$ is chosen from $\mu$. Let
+  $x_i,y_i$ denote the $i$\th rows of $X$ and $Y$ respectively.  If
+  $F: \Omega_1^L \rightarrow [-1,+1]$ and $G: \Omega_2^L \rightarrow
+  [-1,+1]$ are functions such that
+	$$\tau:= \sqrt{\sum_{i \in [L]}\Inf_i[F]\cdot \Inf_i[G]}  ~\text{ and } ~
+	\Gamma := \max \left\{ \sqrt{\sum_{i \in [L]}\Inf_i[F]} , \sqrt{\sum_{i \in 
+	[L]}\Inf_i[G]} \right\} \ ,$$ then
+		\begin{equation}
+		\label{eqn:inv-eqn}
+		\abs{ \E_{(X,Y) \in \mu^{\otimes L}} \left[\prod_{i\in [k]}F(x_i) G(y_i)
+		\right] - \E_{X \in \mu_1^{\otimes L}} \left[\prod_{i\in [k]}F(x_i)\right]
+		\E_{Y \in \mu_2^{\otimes L}} \left[\prod_{i\in [k]}G(y_i)\right] } \leq 
+		2^{O(k)} \Gamma \tau.
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+
+	We will prove the theorem by using the hybrid argument. For $i \in [L+1]$, let 
+	$X^{(i)},Y^{(i)}$ be distributed according to $(\mu_1 \otimes \mu_2)^{\otimes
+	 i} \otimes \mu^{\otimes L- i}$. Thus, $(X^{(0)},Y^{(0)}) =
+       (X,Y)$ is distributed according to $\mu^{\otimes L}$ while
+       $(X^{(L)},Y^{(L)})$ is distributed according to
+       $(\mu_1\otimes\mu_2)^{\otimes L}$. For $i \in [L]$, define
+	%
+	\begin{equation}
+		\label{eqn:err}
+		\err_i := \abs{ \E_{X^{(i)},Y^{(i)}} \left[\prod_{j=1}^kF(x^{(i)}_j) 
+		G(y^{(i)}_j)\right] - \E_{X^{(i+1)},Y^{(i+1)}} \left[\prod_{j=1}^kF(x^
+		{(i+1)}_j) G(y^{(i+1)}_j)\right] }.
+	\end{equation}
+%
+	The left hand side of Equation \eqref{eqn:inv-eqn} is upper bounded by $\sum_{i\in [L]} 
+	\err_i$.  Now for a fixed $i$,  we will bound $\err_i$. We use the 
+	Efron-Stein decomposition of $F,G$ to split them into two
+        parts: the part which depends on the 
+	$i$th input and the part independent of the $i$th input. 
+	%
+	$$F= F_0 + F_1 \text{ where } F_0 := \sum_{\alpha : i\notin \alpha} F_\alpha \mbox{ and } 
+	F_1 := \sum_{\alpha : i\in \alpha} F_\alpha.$$
+	%
+	$$G = G_0 + G_1 \text{ where } G_0 := \sum_{\beta : i\notin \beta} G_\beta  \mbox{ and } 
+	G_1 := \sum_{\beta : i\in \beta} G_\beta.$$
+	%
+	Note that $\Inf_i[F] = \|F_1\|^2_2$ and $\Inf_i[G] =
+        \|G_1\|_2^2$. Furthermore, the functions $F_0$ and $F_1$ are
+        bounded since $F_0(x) = \E_{x^{'}} [F(x^{'}) |
+        x^{'}_{[L]\setminus i} = x_{[L]\setminus i} ] \in [-1,+1]$ and
+        $F_1(x) = F(x) - F_0(x) \in [-2,+2]$.  For $a \in \{0,1\}^k$,
+        let $F_a(X) := \prod_{j =1}^kF_{a_j}(x_j)$.  Similarly
+        $G_0,G_1$ are bounded and $G_a$ defined
+        analogously. Substituting these definitions in Equation
+        \eqref{eqn:err} and expanding the products gives
+	% 
+	$$\err_i = \abs{ \sum_{a,b \in \{0,1\}^k}\left(  \E_{X^{(i)},Y^{(i)}} 
+	\left[F_{a}(X^{(i)}) G_{b}(Y^{(i)})\right]  - \E_{X^{(i+1)},Y^{(i+1)}} \left[
+	F_{a}(X^{(i+1)}) G_{b}(Y^{(i+1)})\right]  \right) }.$$
+	%
+	Since both the distributions are identical on
+	$(\Omega_1^k)^{\otimes L}$ and $(\Omega_2^k)^{\otimes L}$, all
+	terms with $a = \bar 0$ or $b=\bar 0$ are zero. Because $\mu$
+	is uniform on any pair of coordinates on each from the
+	$\Omega_1$ and $\Omega_2$ sides, terms with $|a|=|b|=1$ also
+        evaluates to zero. Now consider the remaining terms with $ |a|,|b| \geq1,
+	|a|+|b| > 2$. Consider one such term where $a_{1},a_2 = 1$ and $b_{1}
+	=1$. In this case, by Cauchy-Schwarz inequality we have that
+	%
+	\begin{align*}
+	\begin{split}
+		\abs{ \E_{X^{(i-1)},Y^{(i-1)}} \left[F_a(X^{(i-1)}) G_{b}(Y^{(i-1)})\right]}
+		 \leq &\sqrt{\E F_1(x_1)^2 G_1(y_1)^2}  \\ &\cdot \|F_1\|_2  \cdot \left\| 
+		\prod_{j>2} F_{a_j}\right\|_\infty \cdot \left\| \prod_{j> 1} G_{b_j}\right
+		\|_\infty.
+	\end{split}
+	\end{align*}
+	From the facts that the marginal of $\mu$ to any pair of
+	coordinates one each from $\Omega_1$ and $\Omega_2$ sides are
+	uniform, $\Inf_i[F] = \|F_1\|_2^2$ and
+	$|F_0(x)|,|F_1(x)|,|G_0(x)|,|G_1(x)|$ are all bounded by $2$,
+	the right side of above becomes
+		\begin{align*}
+ \sqrt{\E F_1(x_1)^2} \sqrt{\E G_1(y_1)^2} \cdot \|F_1\|_2  \cdot \left\|
+		\prod_{j>2} F_{a_j}\right\|_\infty \cdot \left\| \prod_{j> 1} G_{b_j}
+		\right\|_\infty \leq  \sqrt{\Inf_i[F]^2 \Inf_i[G]} \cdot 2^{2k} .
+	\end{align*}
+	%
+	All the other terms corresponding to other $(a,b)$ which are
+	at most $2^{2k}$ in number, are bounded analogously. Hence,
+	%
+	\begin{align*}
+		\sum_{i \in [L]} \err_i &\leq 2^{4k} \sum_{i \in [L]} \left( \sqrt{\Inf_i[F]
+		^2\Inf_i[G]} +\sqrt{\Inf_i[F]\Inf_i[G]^2} \right)\\
+		 &= 2^{4k} \sum_{i \in [L]} \sqrt{\Inf_i[F]
+		\Inf_i[G]}\left( \sqrt{\Inf_i[F]} +\sqrt{\Inf_i[G]} \right).
+	\end{align*}
+By	applying the Cauchy-Schwarz inequality, followed by a triangle inequality, we obtain	
+ 	\begin{align*}
+		\sum_{i \in [L]} \err_i&\leq 2^{4k} \sqrt{\sum_{i \in [L]} \Inf_i[F]\Inf_i[G]}\left(\sqrt{\sum_{i \in [L]}  \Inf_i[F]} + \sqrt{\sum_{i \in 
+		[L]}  \Inf_i[G]} \right).
+	\end{align*}
+Thus, proved.
+\end{proof}
+
+
+

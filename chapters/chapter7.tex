@@ -1,0 +1,179 @@
+
+
+\chapter{Long Code Bottleneck}
+
+
+The last two decades have seen tremendous progress in understanding
+the hardness of approximating constraint satisfaction
+problems. Despite this progress, the status of approximate coloring of
+constant colorable (hyper)graphs is not resolved and in fact, there is
+an exponential (if not doubly exponential) gap between the best known
+approximation algorithms and inapproximability results. The current
+best known approximation algorithms require at least $n^{\Omega(1)}$
+colors to color a constant colorable (hyper)graph on $n$ vertices
+while the best inapproximability results only rule out at best $(\log
+n)^{O(1)}$ (and in fact, in most cases, only $o(\log n)$) colors.
+
+Given this disparity between the positive and negative results, it is
+natural to ask why current inapproximability techniques get stuck at
+the $\poly\log n$ color barrier. The primary bottleneck in going past
+polylogarithmic colors is the use of the {\em long code}, a
+quintessential ingredient in almost all tight inapproximability results,
+since it was first introduced by Bellare, Goldreich \&
+Sudan~\cite{BellareGS1998}. 
+
+\begin{definition}[Long Code]
+For a label $\ell \in \{0,1\}^r$, the long code encoding $A_\ell: \Ef_r \rightarrow \{0,1\}$
+is given by
+$$\forall f \in \Ef_r, A_\ell(f) := f(\ell).$$
+\end{definition}
+The long code, as the name suggests, is
+the most redundant encoding, wherein a $r$-bit Boolean string $x$ is
+encoded by a $2^{2^r}$-bit string which consists of the evaluation of
+all Boolean functions on $r$ bits at the point $x$.
+It is this doubly
+exponential blow-up of the long code which prevents the coloring
+inapproximability to go past the $\poly \log n$ barrier.
+ 
+\section{Low-Degree Long Code}
+\label{sec:low-deg-long-code}
+Recently,
+Barak~\etal~\cite{BarakGHMRS2012}, while trying to understanding the
+tightness of the Arora-Barak-Steurer algorithm for Unique Games,
+introduced the {\em short code}, also called the {\em low-degree long
+  code}~\cite{DinurG2013}. The low-degree long code is a puncturing of
+the long code in the sense, that it contains only the evaluations of
+low-degree functions (opposed to all
+functions). Barak~\etal~\cite{BarakGHMRS2012} introduced the
+low-degree long code to prove exponentially stronger integrality gaps
+for Unique Games, and construct small set expanders whose Laplacians
+have many small eigenvalues,
+
+\begin{definition}[Low-Degree Long Code]
+
+For $a \in \F_p^n$, the degree $d$ long code for $a$ is a function $\LC_d(a):\Pe^n_{d} \rightarrow \F_p$ defined as
+$$\LC_d(a)(f) := f(a).$$
+\end{definition}
+\noindent Note that for $d=(p-1)n$, this matches with the definition of the
+original long code over the alphabet $\F_p$. 
+
+Being a derandomization of the long code, one might hope to use the low-degree long code as a more size-efficient surrogate for the long code in inapproximability results. In fact, Barak~\etal~\cite{BarakGHMRS2012} used
+it obtain a more efficient version of the KKMO alphabet
+reduction~\cite{KhotKMO2007} for Unique Games. However, using the low-degree long code towards improved reductions from Label Cover posed some challenges related to folding, and incorporating noise without giving up perfect completeness (which is crucial for results on coloring). Recently, Dinur \& Guruswami~\cite{DinurG2013}
+introduced a very elegant set of techniques to adapt the long code
+based inapproximability results to low-degree long codes. Using these
+techniques, they proved (1) improved inapproximability results for
+gap-$(1,\frac{15}{16}+\epsilon)$-4SAT for $\epsilon =
+\exp(-2^{\Omega(\sqrt{\log \log N})})$ (long code based reductions
+show for $\epsilon = 1/\poly\log N$) and (2) hardness for a variant of
+approximate hypergraph coloring, with a gap of 2 and
+$\exp(2^{\Omega(\sqrt{\log\log N})})$ number of colors (where $N$ is
+the number of vertices). It is to be noted that the latter is the
+first result to go beyond the logarithmic barrier for a coloring-type
+problem. However, the Dinur-Guruswami~\cite{DinurG2013} results do not
+extend to standard (hyper)graph coloring hardness due to a
+multipartite structural bottleneck in the PCP construction, which we
+elaborate below.
+
+As mentioned earlier, the two main contributions of Dinur-Guruswami~\cite{DinurG2013}
+are (1) folding mechanism over the low-degree long code and (2) noise
+in the low-degree polynomials. The results of
+Bhattacharyya~\etal~\cite{BhattacharyyaKSSZ2010} and
+Barak~\etal~\cite{BarakGHMRS2012} suggest that the product of $d$
+linearly independent affine functions suffices to work as noise for
+the low-degree long code setting (with degree = $d$) in the sense that
+it attenuates the contribution of large weight Fourier
+coefficients. However, this works only for PCP tests with imperfect
+completeness. Since approximate coloring results require perfect
+completeness, Dinur \& Guruswami~\cite{DinurG2013} inspired by the
+above result, develop a noise function which is the product of two
+random low-degree polynomials such that the sum of the degrees is at
+most $d$. This necessitates restricting certain functions in the PCP
+test to be of smaller degree which in turn requires the PCP tests to
+query two types of tables -- one a low-degree long code of degree $d$
+and another a low-degree long code of smaller degree. Though the
+latter table is a part of the former, a separate table is needed since
+otherwise the queries will be biased to the small degree portion of
+the low-degree long code. This multipartite structure is what
+precludes them from extending their result for standard coloring
+results. (Clearly, if the query of the PCP tests straddles two 
+tables, then the associated hypergraph is trivially 2-colorable.)
+
+
+Building on the
+Dinur-Guruswami framework, 
+in \lref[Chapter]{ch:hypergraph-hard}, by a simple test for
+low-degree long code, we
+show that it is quasi-NP-hard to color a 4-colorable 4-uniform
+hypergraph with $2^{2^{\Omega(\sqrt{\log \log n})}}$ colors.
+
+\section{Quadratic Label Cover}
+
+
+  Both the
+Dinur-Guruswami and our results were obtained by modifying
+the innermost PCP verifier to work with the low-degree long
+code. Shortly thereafter, in a remarkable improvement,
+Khot \& Saket~\cite{KhotS2014b} showed that it is
+quasi-NP-hard to color a $2$-colorable $12$-uniform hypergraph with
+$2^{(\log n)^{\Omega(1)}}$ colors.  They obtained this result by using
+an $12$-query inner PCP verifier based on the quadratic code, ie., a low-degree
+long code with degree two. Since degree $2$ functions can be represented
+as matrices, the quadratic code has an alternative simpler definition.
+
+Our focus will be the case when the field $\F$ has characteristic $2$. 
+Let $\F^{m\times m}$ be the vector space of $m\times m$ matrices over
+the field $\F$.
+\begin{definition}[Quadratic Code]
+The quadratic code of $x \in \F^m$ is a function $A_x:\F^{m\times m} \rightarrow \F$ defined as $A_x(X):= \langle X, x\otimes x \rangle$. 
+\end{definition}
+
+  
+    However, to use a quadratic code based
+inner verifier, they needed an outer PCP verifier with a significantly
+stronger soundness guarantee than the standard outer PCP verifier
+obtained from parallel repetition of the PCP Theorem. In particular,
+they needed an outer PCP verifier, which in the soundness case, would
+not be satisfied by a short list of proofs even in {\em
+  superposition}\footnote{We will not require the exact definition of
+  {\em satisfying in superposition} for this note. See
+  \lref[Theorem]{thm:quad-label-cover} for the details of the Khot-Saket outer PCP
+  verifier.}. The construction of this outer PCP verifier with this
+stronger soundness guarantee is the main technical ingredient in the
+result of Khot
+\& Saket~\cite{KhotS2014b}.
+
+
+Our reductions makes use of the following outer PCP verifier of Khot
+\& Saket~\cite{KhotS2014b}. As stated in the introduction, these
+instances have stronger soundness conditions which make them amenable
+for composition with a quadratic code based inner verifier.
+\begin{theorem}[{Khot \& Saket~\cite[, Theorem~7.2]{KhotS2014b}}]
+\label{thm:quad-label-cover}
+There is a quasi-polynomial time reduction from an instance of $\TSAT$ to a bi-regular instance $(U,V,E,\Pi)$ of Label Cover such that 
+\begin{itemize}
+\item Vertex sets $U$ and $V$ are bounded in size by $N$.
+\item The label sets are $\F_2^{r\times r},\F_2^{m\times m}$ for $U$ and $V$ respectively.
+\item For $e \in E$, the map $\pi^e:\F_2^{m\times m} \rightarrow \F_2^{r\times r}$ is a linear transformation that maps symmetric matrices to symmetric matrices\footnote{The property that $\pi$ maps symmetric matrices to symmetric matrices is easy to see from the proof of {\cite[Theorem~7.2]{KhotS2014b}}.}. For an $r\times r$ matrix $X$, $X\circ \pi^e$ is the unique $m \times m$ matrix such that $\langle X \circ \pi^e, Y \rangle = \langle X , \pi^e Y \rangle$.
+\item For each vertex $v \in V$, there is a constraint $C_v$ that is a a conjunction of homogeneous linear equations on the entries of the $m \times m$ matrix label.
+\item $\delta \leq  2^{- \log^{1/3} N}$ and $k \geq  (\log N)^{1/9}$.
+\end{itemize}
+The reduction satisfies:
+\begin{enumerate}
+\item Completeness : If the $\TSAT$ instance is satisfiable then there is a labeling $x_u \otimes x_u$ for $u \in U$ and $y_v \otimes y_v$ for $v\in V$ such that
+\begin{itemize}
+\item  for each $v \in V$, $y_v \in \F_2^m$ has the $m$\th coordinate $1$ and $y_v\otimes y_v$ satisfies the constraint $C_v$,
+\item  for each $(u,v) \in E$, $\pi_{u,v}(y_v \otimes y_v) = x_u \otimes x_u$.
+\end{itemize}
+
+\item Soundness : If the $\TSAT$ instance is not satisfiable then the following cannot hold: There are symmetric matrices $M_u \in \F_2^{r\times r}, M_v \in \F_2^{m\times m}$ for $u\in U, v\in V$ of rank $\leq k$ such that 
+\begin{itemize}
+\item  for each $v \in V$, $M_v \in \F_2^{m \times m}$ has the $(m,m)$\th coordinate $1$ and $M_v$ satisfies the constraint $C_v$,
+\item for $\delta$ fraction of edges $e$, $\pi_e(M_v) = M_u$.
+\end{itemize}
+
+\item Smoothness : For any $v \in V$ and any symmetric  non-zero matrix $M_v$ with rank $\leq k$, over a random choice of an edge $e$ incident on $v$,
+$$ \Pr[\pi_e(M_v) = 0] \leq \delta/2.$$
+
+\end{enumerate}
+\end{theorem}

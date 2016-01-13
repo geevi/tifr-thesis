@@ -1,0 +1,190 @@
+
+\chapter{Almost Coloring of Graphs} \label{ch:graph-hard} 
+
+In this chapter, we describe our hardness results on almost
+graph coloring (joint work with Dinur, Harsha \& Srinivasan \cite{DinurHSV2014}).
+Recall the discussion
+on graph coloring algorithms and hardness results from
+\lref[Section]{sec:approx}. Given a $3$-colorable graph, best known algorithms
+give a $n^{0.19996}$-coloring \cite{KawarabayashiT2014} and it is known that finding a $4$-coloring is
+\NPHard~ \cite{GuruswamiK2004}. Assuming \UGC, Dinur, Mossel \& Regev~\cite{DinurMR2009}, showed that,
+given an almost $3$-colorable graph, it is hard to find a $C$-coloring for any
+constant $C$. Their exact result is as follows:
+
+\begin{theorem}[Dinur, Mossel \& Regev \cite{DinurMR2009}]\label{thm:DMR} 
+There
+is a reduction from \UG\ instances $G$ with $n$ vertices and label set $[R]$ to
+graphs $\cal G$ of size $n3^{R}$ such that 
+\begin{itemize} 
+\item \YES: If $G$ is an
+instance of \UG\ with $\OPT(G)\geq 1-\epsilon$ then there is a subgraph
+of $\cal G$ with fractional size $1-\poly(\epsilon)$ that is $3$-colorable.
+\item \NO: If $G$ is an instance of \UG\ with soundness $\OPT(G) \leq \delta$ then $\cal G$
+does not have any independent sets of fractional size $O(1/\log (1/\delta))$.
+\end{itemize} 
+\end{theorem} 
+
+For any constant $C$, taking $\delta$ to be a small
+enough constant will ensure that the chromatic number is $\geq C$ in the NO
+case. For getting hardness results with super-constant $C$, requires us to have
+sub-constant $\delta$ which depends on $n$. In \UGC, the relation between the
+the label size $R$ and soundness $\delta$ is not specified. But $R =
+\Omega(1/\delta)$, since a random labeling to a \UG\ instance, satisfies
+$O(1/R)$ fraction of the constraints. Assuming \UGC, with $R = \poly(1/\delta)$
+and $\delta = 1/\poly(\log n)$, will ensure that (1) in the NO case, the
+chromatic number is $\Omega(\log \log n)$ and (2) size of $\calG$ is $\poly(n)$.
+
+Dinur \& Shinkar~\cite{DinurS2010} improved the analysis of the reduction, to
+show that there are no independent sets of fractional size $O(1/\poly(\delta))$
+in the NO case. Using the same assumption mentioned earlier, this implies
+hardness for chromatic number $\Omega(\poly(\log n))$. However for these
+results to hold, the alphabet size $R$ has to be $O(\log n)$.
+
+In this chapter, we give a more efficient reduction, which ensures that the size
+of $\calG$ remains small even when $R= 2^{2^{O(\sqrt{\log \log n})}}$. The reduction
+of Dinur, Mossel \& Regev~\cite{DinurMR2009}, used the graph product described in
+\lref[Section]{sec:graph-prod} as a gadget. This is the reason why the size of
+$\calG$ is $n3^R$. We replace this gadget by the derandomized graph product
+construction from \lref[Section]{sec:derand-graph-prod}. This ensures that the
+size of $\calG$ is $n3^{\poly_\delta(\log R)}$. Hence the reduction remains
+polynomial time, even when the alphabet size is much larger than $\log n$.
+
+For getting the hardness result, we need to assume a conjecture similar to the
+Unique Games Conjecture with specific parameters.
+
+\begin{conjecture}[$(c(n),s(n),r(n))$-UG Conjecture]
+ It is NP-Hard to
+distinguish between unique label cover instances $(U,V,E,R,\Pi)$ on $n$ vertices
+and $R=\F_3^{r(n)}$ from the following cases: 
+\begin{itemize}
+ \item YES Case :
+There is a labeling and a set $S\subseteq V$ of size $(1-c(n))|V|$ such that all
+edges between vertices in $S$ are satisfied. 
+\item NO Case : For any labeling,
+at most $s(n)$ fraction of edges are satisfied. 
+\end{itemize} 
+\end{conjecture}
+
+Khot \& Regev~\cite{KhotR2008} proved that the Unique Games Conjecture implies
+that for any constants $c, s \in (0,1/2)$ there is a constant $r$ such that
+$(c,s,r)$-UG Conjecture is true. We also require that the constraints of the
+Unique Games instance are full rank linear maps.
+
+\begin{definition}[Linear constraint] 
+A constraint $\pi:R \rightarrow L$ is a
+linear constraint of iff $R = L=\F_3^r$, and $\pi$ is a linear map of rank $r$.
+\end{definition}
+
+\begin{theorem}\label{thm:col-hard} 
+There is a reduction from $(c,s,r)$-Unique
+Label Cover instances $G$ with $n$ vertices, label set $\F_3^r$ and linear
+constraints to graphs $\cal G$ of size $n3^{r^{O(\log 1/\mu)}}$ where $\mu =
+\poly(s)$ such that 
+\begin{itemize} 
+\item If $G$ belongs to the YES case of
+$(c,s,r)$-UG then there is a subgraph of $\cal G$ with fractional size $1-c$
+that is $3$-colorable. 
+\item If $G$ belongs to the NO case of $(c,s,r)$-UG
+Conjecture then $\cal G$ does not have any independent sets of fractional size
+$\mu$. 
+\end{itemize} 
+\end{theorem} 
+
+Due to the efficiency of reduction, we are
+able to get hardness results even if the label cover instances had
+super-polylogarithmic sized label sets of size at most $2^{2^{O(\sqrt{\log \log
+n})}}$ while the reduction due to Dinur and Shinkar only worked if label set is
+of size $O(\log^c n)$ for some constant $c$. However we get this improvement
+only when soundness of the label cover $s(n) = 1/2^{O(\sqrt{\log \log n})}$.
+ We remark that we can
+improve the conclusion if \lref[Theorem]{thm:derand-ds} can be proved even when
+$d = O(\log \log 1/\mu)$.
+
+
+\begin{corollary}\label{cor:main} 
+Let $c,s,r$ be functions such that
+$s^{-1}(n),r(n) = 2^{O(\sqrt {\log \log n})}$. Assuming $(c,s,r)$-UG Conjecture
+on instances with linear constraints, given a graph on $N$ vertices which has an
+induced subgraph of relative size $1-c$ that is $3$-colorable, no polynomial
+time algorithm can find an independent set of size $\poly(s(N))$.
+\end{corollary}
+
+\section{Reduction}
+
+In this section we prove \lref[Theorem]{thm:col-hard}. Let $G =(U,V,R,E,\Pi)$ be
+a unique games cover instance with label set $R=\F_3^r$ and the constraints
+$\pi$ are full rank linear transformations. We will construct a graph
+$\mathcal{G=(V,E)}$ with $\mathcal V= V\times \Pe_{r,2d}$, where $d$ is a
+parameter to be fixed later. Let $T_{r,d}$ be the operator in
+\lref[Definition]{def:ops}. There is an edge in $\mathcal G$ between $(v,f)$ and
+$(w,g)$ if there is a $u\in U$ such that $(u,v), (u,w) \in E$ and
+$T_{r,d}(f\circ\pi^{-1}_{u,v},g \circ \pi^{-1}_{u,w}) >0$, where $\pi_{u,v}$ is
+the full rank linear map that maps a label of $v$ to label of $u$.
+
+\begin{lemma}[Completeness]\label{lem:completeness}
+ If $G$ belongs to the YES
+case of $(c,s,r)$-UG Conjecture then $\cal G$ has a induced subgraph of relative
+size $1-c$ that is $3$-colorable. 
+\end{lemma} 
+\begin{proof} 
+Suppose the label
+cover instance has a labeling $\ell: V \rightarrow \F_3^r$ and a set $S
+\subseteq V, |S| = (1-c)|V|$, such that $\ell$ satisfies all the edges incident
+on vertices in $S$. We will show that $A_v(f):=f(\ell(v))$ for $v\in V$, is a
+$3$-coloring for the induced subgraph of $\cal G$ on the set $S \times
+\Pe_{r,2d}$. For any $u \in U, v,w \in S$ having edges $(u,v),(u,w)\in E$,
+consider the edge $((v,f),(w,g)) \in \mathcal E$. The colors given to the end
+points are $f(\ell(v))$ and $g(\ell(w))$. Since
+$T_{r,d}(f\circ\pi^{-1}_{u,v},g\circ \pi^{-1}_{u,w}) >0$, $$g\circ
+\pi^{-1}_{u,w} = f\circ \pi^{-1}_{u,v} + a(p^2 +1) \text{ for some } p \in
+\Pe^r_d, a \in \{1,2\}.$$ So $f(\ell(v))= f \circ \pi_{u,v}^{-1}(\ell(u)) \neq
+g\circ \pi_{u,w}^{-1}(\ell(u)) = g (\ell(w))$.
+\end{proof}
+
+\begin{lemma}[Soundness]\label{lem:soundness} 
+If $G$ belongs to the NO case of
+$(c,s,r)$-UG Conjecture, $\cal G$ has an independent set of relative size $\mu$
+and $d= O(\log 1/\mu)$ then $ \mu \leq \poly(s(n)).$ 
+\end{lemma} 
+\begin{proof}
+Let $I_v:\Pe_{r,2d} \rightarrow \{0,1\}$ be the indicator function of $I$
+restricted to vertices in $\mathcal V$ corresponding to $v\in V$. Let $J=\{v \in
+V: \E_{f \in \Pe_{r,2d}} I_v(f) \geq \mu/2\}$. Then we have that $|J|/|V| \geq
+\mu/2$. For $v\in J$, let $L(v) = \{x \in \F_3^{r}: \Inf_x^{\leq k}(I_v) >
+\delta \}$ where $\delta = \poly(\mu), k = O(\log 1/\mu)$ are parameters from
+\lref[Theorem]{thm:derand-ds}. Note that $|L(v)| \leq k/\delta$, since the sum
+of all degree $k$ influences is at most $k$. 
+\begin{claim}\label{claim:sound}
+Let $v,w \in J$ and $(u,v),(u,w) \in E$. Then there exists $a \in L(v), b \in
+L(w)$ such that $\pi_{u,v}(a)= \pi_{u,w}(b)$. 
+\end{claim} 
+\begin{proof}
+ Let
+$A(f):= I_v(f\circ\pi^{-1}_{u,v})$, $B(g):= I_w(g\circ \pi^{-1}_{u,w})$. Since
+$I$ is an independent set, if $(v,f\circ\pi^{-1}_{u,v}),
+(w,g\circ\pi^{-1}_{u,w}) \in I$, then
+$T_{r,d}(f\circ\pi^{-1}_{u,v},g\circ\pi^{-1}_{u,w}) =0$, which gives that
+\begin{equation} 
+\langle A, T_{r,d} B\rangle = 0 
+\end{equation} 
+From
+\lref[Theorem]{thm:derand-ds}, there is some $c \in \F_3^r$ such that
+$\Inf^{\leq k}_c( A),\Inf^{\leq k}_c(B) > \delta$, which gives that
+$\pi_{u,v}^{-1}(c) \in L(v)$ and $\pi_{u,w}^{-1}(c) \in L(w)$. 
+\end{proof} 
+Now
+consider the randomized partial labeling $L'$ to $G$, where for $v \in J$,
+$L'(v)$ is chosen randomly from $L(v)$ and for $u\in U$, choose a random
+neighbor $w \in J$ (if it exists), a random label $a \in L(w)$ and set $L(u)=
+\pi_{u,w}^{-1}(a)$. For any $v \in J$, any edge $(u,v)$, the probability of it
+being satisfied by $L'$ is $\mu^2/k^2 = \poly(\mu)$, because of
+\lref[Claim]{claim:sound}.
+
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:col-hard}] 
+The size of $\mathcal G$
+denoted by $N$ is at most $ n 3^{r^{O(d)}}$. Substituting $r= 2^{O(\sqrt{\log
+\log n})}, d = \log 1/\mu \leq O(\sqrt{\log \log n})$, we get that $N =
+\poly(n)$ and hence the reduction is polynomial time. 
+\end{proof}

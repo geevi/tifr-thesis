@@ -1,5 +1,35 @@
 % the abstract
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
+The graph coloring problem is a notoriously hard problem, for which we do not
+have efficient algorithms. A \emph{coloring} of a graph is an assignment of colors
+to its vertices such that the end points of every edge have different
+colors. A $k$\emph{-coloring} is a coloring that uses at most $k$ distinct colors.
+The \emph{graph coloring} problem is to find a coloring that uses the
+minimum number of colors. Given a $3$-colorable graph, the best known efficient
+algorithms output an $n^{0.199\cdots}$-coloring. It is known that efficient
+algorithms cannot find a $4$-coloring, assuming \P$\neq$\NP\ (such results are commonly known as \emph{hardness}
+results). Hence there is a large gap
+($n^{0.199\cdots}$ vs $4$) between what current algorithms can achieve and the
+hardness results known.
 
-Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.
+In this thesis, we narrow the aforesaid gap for some generalizations of graph coloring, 
+by giving improved hardness results (for exponentially better parameters in some cases). 
+Some of our main results are as follows:
+
+\begin{enumerate}
+
+\item For the case of almost $3$-colorable graphs, we show hardness of finding
+a $2^{\poly(\log \log n)}$-coloring, assuming a variant of the Unique Games
+Conjecture (\UGC).
+
+\item For the case of $3$-colorable $3$-uniform hypergraphs, we show 
+quasi-\NP-hardness of finding a $2^{O(\log \log n/ \log \log \log n)}$-coloring.
+
+\item For the case of $4$-colorable $4$-uniform hypergraphs, we show 
+quasi-\NP-hardness of finding a $2^{(\log n)^{1/21}}$-coloring.
+
+\item For the problem of the approximating the covering number of CSPs with
+non-odd predicates, we show hardness of approximation to any constant factor,
+assuming a variant of \UGC.
+
+\end{enumerate}

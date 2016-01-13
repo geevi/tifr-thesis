@@ -1,0 +1,224 @@
+
+\chapter{PCPs \& Hardness of Approximation}
+
+In this chapter, we will review some of the fundamental results in hardness of
+approximation. One of the main results is an alternate characterization for \NP.
+Recall the definition of \NP\ (\lref[Definition]{def:np}).
+For the verifier of an \NP\ problem, the proof length is at most a polynomial in
+$n$. The alternate characterization deals with probabilistic verifiers, that
+query only a few bits in the proof.
+
+\begin{definition}[{$\PCP_{c,s}[t,q,R]$}] 
+A $\PCP_{c,s}[t(n),q(n), R]$-Verifier (\PCP\ stands for Probabilistically 
+Checkable Proofs)
+for a decision problem $L$, is an algorithm $V$
+which takes an input $x$, a random string
+$y \in \{0,1\}^{t(n)}$, has oracle access to a proof $\pi$ over alphabet $[R]$ of length $2^{t(n)}$
+ and satisfies the following properties:
+ \begin{itemize}
+ \item $V$ runs in polynomial time in the length of $x$ for all $y,\pi$.
+\item $V$ queries $\pi$ in at most $q(n)$ bits on all inputs. 
+\item Completeness: If $x \in L$ then there exists $\pi$ such that $\Pr_y[V(x,\pi)=1]\geq c$.
+\item Soundness : If $x \notin L$ then for any $\pi$, $\Pr_y[V(x, \pi)=1] \leq
+s$.
+ \end{itemize} 
+ $\PCP_{c,s}[t,q,R]$ is the class of decision problems that have
+a $ \PCP_{c,s}[t,q,R]$-Verifier.
+ \end{definition} 
+ It is not difficult to see that,
+for any $q$, constant $R$ and $s<c$, $$\PCP_{c,s}[O(\log n),q,R] \subseteq
+\NP.$$ A major breakthrough in PCP characterizations, which lead to many
+hardness of approximation results was the following theorem due to Arora \&
+Safra~\cite{AroraS1998} and Arora \etal~\cite{AroraLMSS1998}. 
+\begin{theorem}[PCP Theorem] 
+There exists constant $s <1, q,R$ such that $$\NP \subseteq
+\PCP_{1,s}[O(\log n),q,R].$$ 
+\end{theorem} 
+In the above form, it is not clear
+how the theorem might be useful in hardness of approximation results. The
+theorem can be stated equivalently as a hardness of approximation result.
+
+\begin{theorem}[Hardness of Approximating \MAXTSAT] There exists a constant $s
+<1$, such that it is \NPHard\ to distinguish satisfiable \MAXTSAT\ instances,
+from ones for which any assignment can satisfy at most $s$ fraction of the
+clauses. \end{theorem}
+
+It is easy to see that the above theorem is equivalent to having a
+$\PCP_{1,s}[O(\log n),3,2]$-Verifier for \MAXTSAT, whose checks are \MAXTSAT\
+clauses. The equivalence follows from viewing such verifiers as 
+\MAXTSAT\ instances and vice versa.
+ Any such verifier could be converted to a \MAXTSAT\ instance.
+The instance is obtained by adding a variable for every bit of the proof,
+and adding a \MAXTSAT\ clause for every check the verifier makes.
+Any \MAXTSAT\ instance, has a trivial \PCP\ verification procedure,
+whose proof is the assignment and the verifier chooses a random clause,
+and checks if it is satisfied by the assignment.
+
+
+\section{Label Cover}
+
+The PCP theorem stated in terms hardness of approximation of \MAXTSAT, does not
+give optimal inapproximability results (see H\aa stad \cite{Hastad2001}). 
+To get strong results, it is used in
+conjunction with the parallel repetition theorem of Raz~\cite{Raz1998}. 
+This strong version of PCP
+theorem is usually stated in terms of the \LabelCover\ problem.
+
+\begin{definition}[\LabelCover]
+	
+	\label{def:label-cover} An instance $G=(U,V,E,L,
+	R,\{\pi_e\}_{e\in E})$ of the {\LC} constraint satisfaction
+	problem consists of a bi-regular bipartite graph $(U,V,E)$,
+        two sets of alphabets $R$ and $L$ and a projection map $\pi_e : R \rightarrow
+        L$ for every edge $e\in E$.
+        Given a labeling $\ell : U \rightarrow R, \ell:V \rightarrow
+        L$, an edge $e = (u,v)$ is said to be satisfied by $\ell$ if
+        $\pi_e(\ell(v)) = \ell(u)$. 
+
+        $G$ is said to be \emph{at most $\delta$-satisfiable} if every
+        labeling satisfies at most a $\delta$ fraction of the
+        edges. 
+        
+	An instance of \UG\ is a label cover instance where $L=R$ and the constraints 
+	$\pi$ are permutations.
+\end{definition}
+
+
+We consider label cover instances obtained from $\TSAT$ instances in the
+following natural manner. 
+\begin{definition}[$r$-repeated label cover]
+\label{def:label-cover} 
+Let $\phi$ be a $\TSAT$ instance with $X$ as the set of
+variables and $C$ the set of clauses. The $r$-repeated bipartite label cover
+instance $I(\phi)$ is specified by: 
+\begin{itemize} 
+\item A graph $G:=(U,V,E)$,
+where $U:=C^r, V:=X^r$. \item $\Sigma_U := \{0,1\}^{3r},\Sigma_V := \{0,1\}^r$.
+\item There is an edge $(u,v) \in E$ if the tuple of variables $v$ can be
+obtained from the tuple of clauses $u$ by replacing each clause by a variable in
+it. 
+\item The constraint $\pi_{uv}:\{0,1\}^{3r}\rightarrow \{0,1\}^{r}$ is
+simply the projection of the assignments on $3r$ variables in all the clauses in
+$u$ to the assignments on the $r$ variables in $v$. \item For each $u$ there is
+a set of $r$ functions $\{f^u_i:\{0,1\}^{3r} \rightarrow \{0,1\} \}_{i=1}^r$
+such that $f^u_i(a)=0$ iff the assignment $a$ satisfies the $i$th clause in $u$.
+Note that $f^u_i$ depends only on the $3$ variables in the $i$th clause.
+\end{itemize} 
+A labeling $L_U:U\rightarrow \Sigma_U,L_V:V\rightarrow \Sigma_V$
+satisfies an edge $(u,v)$ iff $\pi_{uv}(L_U(u))=L_V(v)$ and $L_U(u)$ satisfies
+all the clauses in $u$. Let $\OPT(I(\phi))$ be the maximal fraction of
+constraints that can be satisfied by any labeling. 
+\end{definition} 
+The
+following theorem is obtained by applying  parallel repetition
+theorem of Raz~\cite{Raz1998} with $r$ repetitions on hard instances of
+\MAXTSAT\ where each variable occurs the same number of
+times (see Feige's result~\cite{Feige1998}) and a structural property proved by
+H\aa stad \cite[Lemma 6.9]{Hastad2001}. 
+
+\begin{theorem} \label{thm:label-cover} 
+There is an
+algorithm which on input a \TSAT\ instance $\phi$ and $r\in \N$ outputs an
+$r$-repeated label cover instance $I(\phi)$ in time $n^{O(r)}$ with the
+following properties. 
+\begin{itemize} 
+\item Completeness: If $\phi \in \TSAT$, then $\OPT(I(\phi))=1$. 
+\item Soundnes: If $\phi \notin \TSAT$, then $\OPT(I(\phi)) \leq
+2^{-\epsilon_0 r}$ for some universal constant $\epsilon_0\in (0,1)$.
+\item Smooth Projections: 		
+$$\forall v \in V, \alpha \subset R, \qquad Pr_u \left[ |\pi_{uv}(\alpha)| <|\alpha|^{c_0}\right] \leq \frac{1}{|\alpha|^{c_0}}.$$
+\end{itemize} 
+Moreover, the underlying graph $G$ is both left and right regular.
+\end{theorem}
+
+
+ For our hardness results for
+$3$-uniform $3$-colorable hypergraphs, we need a multipartite version of label
+cover, satisfying a smoothness condition. 
+\begin{definition}[\cite{Khot2002b}]
+Let $I$ be a bipartite label cover instance specified by
+$\left((U,V,E),\Sigma_U,\Sigma_V,\Pi\right)$. Then $I$ is $\eta$-\emph{smooth}
+iff for every $u \in U$ and two distinct labels $a,b \in \Sigma_U$ 
+$$\Pr_v[\pi_{uv}(a) = \pi_{uv}(b) ] \leq \eta,$$ 
+where $v$ is a random neighbour of $u$.
+\end{definition} 
+\begin{definition}[$r$-repeated $\ell$-layered $\eta$-smooth label cover]
+\label{def:multilayer} 
+Let $T:=\lceil\ell/\eta\rceil$ and $\phi$ be
+a \TSAT\ instance with $X$ as the set of variables and $C$ the set of clauses.
+The $r$-repeated $\ell$-layered $\eta$-smooth label cover instance $I(\phi)$ is
+specified by: 
+\begin{itemize} 
+\item An $\ell$-partite graph with vertex sets
+$V_0, \cdots V_{\ell-1}$. Elements of $V_i$ are tuples of the form $(C',X')$
+where $C'$ is a set of $(T+\ell - i)r$ clauses and $X'$ is a a set of $ir$
+variables. 
+\item $\Sigma_{V_i} := \{0,1\}^{m_i}$ where $m_i:={3(T+\ell - i)r
++ir}$ which corresponds to all Boolean assignments to the clauses and variables
+corresponding to a vertex in layer $V_i$. 
+\item For $0 \leq i < j < \ell$,
+$E_{ij} \subseteq V_i \times V_j$ denotes the set of edges between layers $V_i$
+and $V_j$. For $v_i \in V_i, v_j \in V_j$, there is an edge $(v_i,v_j) \in
+E_{ij}$ iff $v_j$ can be obtained from $v_i$ by replacing some $(j-i)r$ clauses
+in $v_i$ with variables occurring in the clauses respectively. 
+\item The
+constraint $\pi_{v_i v_j}$ is the projection of assignments for clauses and
+variables in $v_i$ to that of $v_j$. 
+\item For each $i <\ell$, $v_i \in V_i$,
+there are $(T+\ell - i)r$ functions $f_j^{v_i}:\{0,1\}^{3(T+\ell - i)r
++ir}\rightarrow \{0,1\}$, one for each clause $j$ in $v_i$ such that
+$f_j^{v_i}(a)=0$ iff $a$ satisfies the clause $j$. This function only depends on
+the $3$ coordinates in $j$. \end{itemize} Given a labeling $L_i:V_i\rightarrow
+\Sigma_{V_i}$ for all the vertices, an edge $(v_i,v_j) \in E_{ij}$ is satisfied
+iff $L_i(v_i)$ satisfies all the clauses in $v_i$, $L_j(v_j)$ satisfies all the
+clauses in $v_j$ and $\pi_{v_i v_j}(L_i(v_i)) = L_j(v_j)$. Let
+$\OPT_{ij}(I(\phi))$ be the maximum fraction of edges in $E_{ij}$ that can be
+satisfied by any labeling. 
+\end{definition} 
+The following theorem was proved by
+Dinur~\etal~\cite{DinurGKR2005} in the context of hypergraph vertex cover
+inapproximability (also see results of Dinur, Regev \& Smyth~\cite{DinurRS2005}). 
+\begin{theorem}
+\label{thm:layered-label-cover} 
+There is an algorithm which on input a \TSAT\
+instance $\phi$ and $\ell,r\in \N, \eta \in [0,1)$ outputs a $r$-repeated
+$\ell$-layered $\eta$-smooth label cover instance $I(\phi)$ in time
+$n^{O((1+1/\eta)\ell r)}$ with the following properties. 
+\begin{enumerate} 
+\item $\forall~ 0\leq i < j < \ell$, the bipartite label cover instance on
+$I_{ij}=\left((V_i,V_j,E_{ij}),\Sigma_{V_i},\Sigma_{V_j},\Pi_{ij}\right)$ is
+$\eta$-smooth. 
+\item For $1<m<\ell$, any $m$ layers $0\leq i_1< \cdots <i_m\leq
+\ell-1$, any $S_{i_j} \subseteq V_{i_j}$ such that $|S_{i_j}| \geq
+\frac{2}{m}|V_{i_j}|$, there exists distinct ${i_j}$ and ${i_{j'}}$ such that
+the fraction of edges between $S_{i_j}$ and $S_{i_{j'}}$ relative to
+$E_{i_ji_{j'}}$ is at least $1/m^2$. 
+\item If $\phi \in \TSAT$, then there is a
+labeling for $I(\phi)$ that satisfies all the constraints. 
+\item If $\phi \notin \TSAT$, then 
+$$\OPT_{i,j}(I(\phi)) \leq 2^{-\Omega(r)}, \quad \forall 0\leq i <j \leq \ell.$$ 
+\end{enumerate} 
+\end{theorem}
+
+\section{Unique Games Conjecture}
+
+Khot observed~\cite{Khot2002} that if the label sets in the \LabelCover\
+instance are the same and the projections are permutations, then
+the hardness reductions could be simplified.
+He made the
+conjecture that \LabelCover\ is hard to approximate to any constant factor,
+restricted to such kind of instances.
+\begin{definition}[Unique Games Conjecture]
+For every $\delta$ there exists a large enough $R$ such that it
+is hard to distinguish between \UniqueGame\ instances $G$ have label
+size  $R$ from the following cases.
+\begin{itemize}
+\item \YES\ case : $\OPT(G)\geq 1-\delta$
+\item \NO\ case :  $\OPT \leq \delta$
+\end{itemize}
+\end{definition}
+
+Starting with the work of Khot ~\cite{Khot2002}, it was shown that  
+UGC, explains the lack of efficient approximation algorithms for a 
+variety of problems (eg. Vertex Cover, MAX-CUT).
+
